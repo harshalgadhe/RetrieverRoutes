@@ -1,0 +1,7 @@
+/* Reset App.css - All major layout tokens and design systems are central in index.css */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
