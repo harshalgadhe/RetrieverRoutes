@@ -12,6 +12,7 @@ import Homepage from './views/Homepage';
 import ExploreTrips from './views/ExploreTrips';
 import TripDetails from './views/TripDetails';
 import ContactView from './views/ContactView';
+import NotFoundView from './views/NotFoundView';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState('home');
@@ -94,7 +95,7 @@ export default function App() {
       case 'contact':
         return <ContactView />;
       default:
-        return <Homepage setCurrentScreen={setCurrentScreen} setSelectedTrip={setSelectedTrip} onOpenInquiry={handleOpenInquiry} />;
+        return <NotFoundView setCurrentScreen={setCurrentScreen} />;
     }
   };
 
