@@ -22,9 +22,14 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterCategory, setFilterCategory] = useState('All');
 
-  // Theme Management
+  // OS-Aware Theme Management (System default settings alignment)
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('rr-theme') || 'dark';
+    const savedTheme = localStorage.getItem('rr-theme');
+    if (savedTheme) return savedTheme;
+    
+    // Fallback to OS preference
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return prefersDark ? 'dark' : 'light';
   });
 
   // Modals Visibility
@@ -32,11 +37,23 @@ export default function App() {
   const [isInquiryOpen, setIsInquiryOpen] = useState(false);
   const [inquiryTrip, setInquiryTrip] = useState(null);
 
-  // Synchronize theme with HTML document attribute
+  // Synchronize theme with HTML document attribute and register system preferences change listener
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('rr-theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleSystemThemeChange = (e) => {
+      // Auto-adapt to OS setting only if the user hasn't explicitly set a cached preference
+      if (!localStorage.getItem('rr-theme')) {
+        setTheme(e.matches ? 'dark' : 'light');
+      }
+    };
+    
+    mediaQuery.addEventListener('change', handleSystemThemeChange);
+    return () => mediaQuery.removeEventListener('change', handleSystemThemeChange);
+  }, []);
 
   // Auto-scroll to top when screen changes
   useEffect(() => {
@@ -44,7 +61,9 @@ export default function App() {
   }, [currentScreen]);
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(nextTheme);
+    localStorage.setItem('rr-theme', nextTheme);
   };
 
   const handleOpenInquiry = (trip) => {

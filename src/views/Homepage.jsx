@@ -18,9 +18,7 @@ export default function Homepage({ setCurrentScreen, setSelectedTrip, setSearchQ
   // Derived high-fidelity travelers label
   const searchGuests = `${adults} Adult${adults !== 1 ? 's' : ''}${childrenCount > 0 ? `, ${childrenCount} Child${childrenCount !== 1 ? 'ren' : ''}` : ''}`;
 
-  // Newsletter subscription
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
+
 
   const popularDestinations = [
     { name: 'Bali', country: 'Indonesia', image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=500&q=80', category: 'Beach' },
@@ -50,14 +48,7 @@ export default function Homepage({ setCurrentScreen, setSelectedTrip, setSearchQ
     setCurrentScreen('details');
   };
 
-  const handleNewsletterSubmit = (e) => {
-    e.preventDefault();
-    if (!newsletterEmail) return;
-    setNewsletterSubscribed(true);
-    setTimeout(() => {
-      setNewsletterEmail('');
-    }, 2000);
-  };
+
 
   // Custom Inline Instagram SVG
   const InstagramIcon = () => (
@@ -611,7 +602,7 @@ export default function Homepage({ setCurrentScreen, setSelectedTrip, setSearchQ
                   onClick={() => setActiveTestimonial(idx)}
                   style={{
                     width: '6px', height: '6px', borderRadius: '50%',
-                    backgroundColor: activeTestimonial === idx ? 'var(--color-accent)' : 'rgba(255,255,255,0.2)',
+                    backgroundColor: activeTestimonial === idx ? 'var(--color-accent)' : 'var(--color-text-muted)',
                     cursor: 'pointer', display: 'inline-block', transition: 'background-color 0.2s'
                   }}
                 />
@@ -722,61 +713,7 @@ export default function Homepage({ setCurrentScreen, setSelectedTrip, setSearchQ
             </button>
           </div>
 
-          {/* Box 3: Newsletter Sign-up */}
-          <div className="glass-panel" style={{
-            padding: '28px 24px',
-            borderRadius: 'var(--radius-md)',
-            border: '1px solid var(--color-border-green)',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            background: 'rgba(11, 21, 16, 0.4)'
-          }}>
-            <div>
-              <div style={{
-                width: '42px', height: '42px', borderRadius: '50%',
-                backgroundColor: 'rgba(13, 95, 56, 0.25)',
-                color: 'var(--color-primary-light)', marginBottom: '16px', display: 'flex', justifyContent: 'center', alignItems: 'center'
-              }} className="animate-float">
-                <Mail size={20} />
-              </div>
-              <h3 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '8px' }}>Join the Newsletter Pack</h3>
-              <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: '1.5', marginBottom: '20px' }}>
-                Receive customized bi-weekly hike itineraries, trail guides, and seasonal group slots.
-              </p>
-            </div>
 
-            {newsletterSubscribed ? (
-              <div style={{
-                display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center',
-                padding: '12px', color: 'var(--color-accent)', fontSize: '13px', fontWeight: '700'
-              }}>
-                <CheckCircle size={18} /> Subscribed Successfully!
-              </div>
-            ) : (
-              <form onSubmit={handleNewsletterSubmit} style={{ display: 'flex', gap: '8px' }}>
-                <input
-                  type="email"
-                  placeholder="Enter email..."
-                  value={newsletterEmail}
-                  onChange={(e) => setNewsletterEmail(e.target.value)}
-                  style={{ flexGrow: 1, padding: '10px', fontSize: '12px' }}
-                  className="form-input"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="glow-btn-green"
-                  style={{
-                    padding: '0 16px', borderRadius: 'var(--radius-sm)',
-                    border: 'none', fontSize: '12px', cursor: 'pointer'
-                  }}
-                >
-                  Join
-                </button>
-              </form>
-            )}
-          </div>
         </div>
       </section>
 
