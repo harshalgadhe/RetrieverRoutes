@@ -53,16 +53,42 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.2s ease, box-shadow 0.3s ease;
 }
 
 html, body {
-  background: radial-gradient(circle at 50% 0%, rgba(11, 102, 56, 0.16) 0%, rgba(7, 14, 11, 1) 85%), #070e0b;
-  background-attachment: fixed;
+  background: radial-gradient(circle at 80% 20%, #0c2b1a 0%, #050d0a 50%, #030806 100%) no-repeat fixed;
   color: var(--color-text-primary);
   min-height: 100vh;
   overflow-x: hidden;
   font-size: 16px;
   scroll-behavior: smooth;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* Light Theme Variables Override */
+[data-theme='light'] {
+  --color-bg-base: #f2faf5;       /* Clean Light Mint White */
+  --color-bg-card: rgba(255, 255, 255, 0.8); /* Pure White Translucent Glass */
+  --color-bg-card-hover: rgba(255, 255, 255, 0.95);
+  --color-border: rgba(242, 159, 5, 0.25); /* More visible gold */
+  --color-border-focus: rgba(242, 159, 5, 0.6);
+  --color-border-green: rgba(6, 59, 33, 0.15); /* Subtler dark borders */
+
+  --color-text-primary: #042314;  /* Dark forest green for extreme legibility */
+  --color-text-secondary: #3b5e4c;/* Muted forest green body text */
+  --color-text-muted: #6b8d7c;    
+  --color-text-gold: #e28e00;     /* Richer gold for light backgrounds */
+  
+  --shadow-sm: 0 2px 8px rgba(6, 59, 33, 0.08);
+  --shadow-md: 0 8px 24px rgba(6, 59, 33, 0.12);
+  --shadow-lg: 0 16px 48px rgba(6, 59, 33, 0.16);
+  --shadow-glow-green: 0 0 25px rgba(6, 59, 33, 0.08);
+  --shadow-glow-gold: 0 0 25px rgba(242, 159, 5, 0.12);
+}
+
+[data-theme='light'] body {
+  background: radial-gradient(circle at 80% 20%, #e2f3e8 0%, #f2faf5 50%, #ffffff 100%) no-repeat fixed;
 }
 
 h1, h2, h3, h4, h5, h6 {

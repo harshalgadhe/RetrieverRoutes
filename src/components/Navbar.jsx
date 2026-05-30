@@ -1,8 +1,8 @@
 import React from 'react';
-import { Compass, MessageSquare, PhoneCall } from 'lucide-react';
+import { Compass, MessageSquare, PhoneCall, Sun, Moon } from 'lucide-react';
 import logoImg from '../assets/logo.png';
 
-export default function Navbar({ currentScreen, setCurrentScreen, onOpenInquiry }) {
+export default function Navbar({ currentScreen, setCurrentScreen, onOpenInquiry, theme, toggleTheme }) {
   return (
     <header className="glass-panel" style={{
       position: 'fixed',
@@ -102,8 +102,29 @@ export default function Navbar({ currentScreen, setCurrentScreen, onOpenInquiry 
         </span>
       </nav>
 
-      {/* Right Action Call Trigger */}
-      <div>
+      {/* Right Action Call Triggers (Inquire + Theme Switcher) */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        {/* Modern Theme Toggle Button */}
+        <button
+          onClick={toggleTheme}
+          className="icon-hover-btn"
+          style={{
+            background: 'none',
+            border: 'none',
+            color: 'var(--color-text-secondary)',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '10px',
+            borderRadius: '50%',
+            transition: 'background var(--transition-fast), color var(--transition-fast)'
+          }}
+          title={theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
+        >
+          {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+        </button>
+
         <button 
           className="glow-btn-gold"
           onClick={() => onOpenInquiry(null)}
@@ -131,6 +152,10 @@ export default function Navbar({ currentScreen, setCurrentScreen, onOpenInquiry 
           .desktop-nav { display: none !important; }
         }
         .nav-link:hover {
+          color: var(--color-accent) !important;
+        }
+        .icon-hover-btn:hover {
+          background: rgba(255, 255, 255, 0.08);
           color: var(--color-accent) !important;
         }
       `}</style>

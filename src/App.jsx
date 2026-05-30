@@ -21,15 +21,30 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterCategory, setFilterCategory] = useState('All');
 
+  // Theme Management
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('rr-theme') || 'dark';
+  });
+
   // Modals Visibility
   const [isAIPlannerOpen, setIsAIPlannerOpen] = useState(false);
   const [isInquiryOpen, setIsInquiryOpen] = useState(false);
   const [inquiryTrip, setInquiryTrip] = useState(null);
 
+  // Synchronize theme with HTML document attribute
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('rr-theme', theme);
+  }, [theme]);
+
   // Auto-scroll to top when screen changes
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentScreen]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
 
   const handleOpenInquiry = (trip) => {
     setInquiryTrip(trip);
@@ -97,6 +112,8 @@ export default function App() {
         currentScreen={currentScreen} 
         setCurrentScreen={setCurrentScreen} 
         onOpenInquiry={handleOpenInquiry}
+        theme={theme}
+        toggleTheme={toggleTheme}
       />
 
       {/* Screen Views Wrapper with framer-motion animations */}
