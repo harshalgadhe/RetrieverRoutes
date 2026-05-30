@@ -66,29 +66,29 @@ html, body {
   transition: background-color var(--transition-normal), color var(--transition-normal);
 }
 
-/* Light Theme Variables Override */
+/* Light Theme Variables Override - Premium Minimalist Alabaster Style */
 [data-theme='light'] {
-  --color-bg-base: #f2faf5;       /* Clean Light Mint White */
-  --color-bg-card: rgba(255, 255, 255, 0.8); /* Pure White Translucent Glass */
-  --color-bg-card-hover: rgba(255, 255, 255, 0.95);
-  --color-border: rgba(242, 159, 5, 0.25); /* More visible gold */
-  --color-border-focus: rgba(242, 159, 5, 0.6);
-  --color-border-green: rgba(6, 59, 33, 0.15); /* Subtler dark borders */
+  --color-bg-base: #fcfcfa;       /* Clean Alabaster Stationery White */
+  --color-bg-card: #ffffff;       /* Pure White Card Surface */
+  --color-bg-card-hover: #faf9f6; /* Warm Off-White Hover */
+  --color-border: rgba(242, 159, 5, 0.2); /* Fine Brand Gold */
+  --color-border-focus: rgba(242, 159, 5, 0.5);
+  --color-border-green: rgba(6, 59, 33, 0.08); /* Fine Brand Green */
 
-  --color-text-primary: #042314;  /* Dark forest green for extreme legibility */
-  --color-text-secondary: #3b5e4c;/* Muted forest green body text */
-  --color-text-muted: #6b8d7c;    
-  --color-text-gold: #e28e00;     /* Richer gold for light backgrounds */
+  --color-text-primary: #063b21;  /* Exact Brand Hunter Green (High Legibility Header) */
+  --color-text-secondary: #4a5750;/* Premium Charcoal Slate-Green (High Legibility Body) */
+  --color-text-muted: #7c8c83;    /* Muted Sage-Grey */
+  --color-text-gold: #d48200;     /* Deep Gold for Light Backgrounds */
   
-  --shadow-sm: 0 2px 8px rgba(6, 59, 33, 0.08);
-  --shadow-md: 0 8px 24px rgba(6, 59, 33, 0.12);
-  --shadow-lg: 0 16px 48px rgba(6, 59, 33, 0.16);
-  --shadow-glow-green: 0 0 25px rgba(6, 59, 33, 0.08);
-  --shadow-glow-gold: 0 0 25px rgba(242, 159, 5, 0.12);
+  --shadow-sm: 0 4px 12px rgba(6, 59, 33, 0.03);
+  --shadow-md: 0 12px 36px rgba(6, 59, 33, 0.05);
+  --shadow-lg: 0 24px 64px rgba(6, 59, 33, 0.08);
+  --shadow-glow-green: 0 0 20px rgba(6, 59, 33, 0.04);
+  --shadow-glow-gold: 0 0 20px rgba(242, 159, 5, 0.08);
 }
 
 [data-theme='light'] body {
-  background: radial-gradient(circle at 80% 20%, #e2f3e8 0%, #f2faf5 50%, #ffffff 100%) no-repeat fixed;
+  background: #fafafa !important; /* Flat premium minimalist off-white */
 }
 
 h1, h2, h3, h4, h5, h6 {
