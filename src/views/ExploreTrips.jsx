@@ -134,7 +134,7 @@ export default function ExploreTrips({
                 background: 'rgba(7, 14, 11, 0.85)',
                 backdropFilter: 'blur(8px)',
                 border: '1px solid var(--color-border)',
-                color: 'var(--color-text-gold)',
+                color: '#f29f05',
                 padding: '4px 10px',
                 borderRadius: 'var(--radius-sm)',
                 fontSize: '12px',

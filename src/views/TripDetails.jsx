@@ -129,7 +129,7 @@ export default function TripDetails({ trip, setCurrentScreen, onOpenInquiry }) {
                 letterSpacing: '0.05em',
                 cursor: 'pointer',
                 border: mediaType === type ? '1px solid var(--color-accent)' : '1px solid rgba(255,255,255,0.05)',
-                color: mediaType === type ? 'var(--color-accent)' : 'var(--color-text-secondary)',
+                color: mediaType === type ? 'var(--color-accent)' : 'rgba(255, 255, 255, 0.6)',
                 background: mediaType === type ? 'rgba(7, 14, 11, 0.9)' : 'rgba(7, 14, 11, 0.6)'
               }}
             >

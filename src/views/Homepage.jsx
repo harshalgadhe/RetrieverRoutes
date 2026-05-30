@@ -81,10 +81,10 @@ export default function Homepage({ setCurrentScreen, setSelectedTrip, setSearchQ
         padding: '40px 30px',
         marginBottom: '40px',
         boxShadow: 'var(--shadow-lg)',
-        backgroundImage: 'linear-gradient(135deg, rgba(6, 59, 33, 0.45) 0%, rgba(7, 14, 11, 0.95) 100%)',
+        backgroundImage: 'var(--color-hero-bg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        border: '1px solid var(--color-border-green)'
+        border: 'var(--color-hero-border)'
       }}>
 
         <motion.div 
@@ -172,11 +172,7 @@ export default function Homepage({ setCurrentScreen, setSelectedTrip, setSearchQ
               <ChevronDown size={16} style={{ color: 'var(--color-text-muted)', flexShrink: 0, transform: showDatesDropdown ? 'rotate(180deg)' : 'none', transition: 'transform var(--transition-fast)' }} />
             </div>
             {showDatesDropdown && (
-              <div className="glass-panel" style={{
-                position: 'absolute', top: 'calc(100% + 8px)', left: 0, right: 0,
-                borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border-green)',
-                boxShadow: 'var(--shadow-lg)', zIndex: 20
-              }}>
+              <div className="dropdown-panel custom-scrollbar">
                 {['Summer 2026 (Peak Hikes)', 'Autumn 2026 (Gold Foliage)', 'Winter 2027 (Alpine Snow)', 'Spring 2027 (Blooming Trails)'].map((s) => (
                   <div
                     key={s}
@@ -209,11 +205,7 @@ export default function Homepage({ setCurrentScreen, setSelectedTrip, setSearchQ
               <ChevronDown size={16} style={{ color: 'var(--color-text-muted)', flexShrink: 0, transform: showGuestsDropdown ? 'rotate(180deg)' : 'none', transition: 'transform var(--transition-fast)' }} />
             </div>
             {showGuestsDropdown && (
-              <div className="glass-panel" style={{
-                position: 'absolute', top: 'calc(100% + 8px)', left: 0, right: 0, minWidth: '240px',
-                borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border-green)',
-                boxShadow: 'var(--shadow-lg)', zIndex: 20, padding: '16px'
-              }}>
+              <div className="dropdown-panel custom-scrollbar" style={{ minWidth: '240px', padding: '16px 16px 20px 16px' }}>
                 {/* Adults Counter */}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
                   <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -349,8 +341,8 @@ export default function Homepage({ setCurrentScreen, setSelectedTrip, setSearchQ
                 background: 'linear-gradient(transparent 30%, rgba(7, 14, 11, 0.9))',
                 display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '16px'
               }}>
-                <h3 style={{ fontSize: '18px', fontWeight: '700' }}>{dest.name}</h3>
-                <p style={{ fontSize: '12px', color: 'var(--color-text-secondary)' }}>{dest.country}</p>
+                <h3 style={{ fontSize: '18px', fontWeight: '700', color: '#ffffff', textShadow: '0 1px 4px rgba(0,0,0,0.6)' }}>{dest.name}</h3>
+                <p style={{ fontSize: '12px', color: '#a3c2b2', textShadow: '0 1px 2px rgba(0,0,0,0.4)', fontWeight: '600' }}>{dest.country}</p>
               </div>
             </motion.div>
           ))}
@@ -406,7 +398,7 @@ export default function Homepage({ setCurrentScreen, setSelectedTrip, setSearchQ
                 <div style={{
                   position: 'absolute', top: '16px', right: '16px',
                   background: 'rgba(7, 14, 11, 0.85)', backdropFilter: 'blur(8px)',
-                  border: '1px solid var(--color-border)', color: 'var(--color-text-gold)',
+                  border: '1px solid var(--color-border)', color: '#f29f05',
                   padding: '6px 12px', borderRadius: 'var(--radius-sm)', fontSize: '13px', fontWeight: '700'
                 }}>
                   From ₹{trip.price.toLocaleString('en-IN')}
@@ -664,7 +656,7 @@ export default function Homepage({ setCurrentScreen, setSelectedTrip, setSearchQ
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            background: 'linear-gradient(135deg, rgba(6, 59, 33, 0.15), rgba(7, 14, 11, 0.4))'
+            background: 'var(--color-comm-card-1)'
           }}>
             <div>
               <div style={{
@@ -702,7 +694,7 @@ export default function Homepage({ setCurrentScreen, setSelectedTrip, setSearchQ
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            background: 'linear-gradient(135deg, rgba(242, 159, 5, 0.08), rgba(7, 14, 11, 0.4))'
+            background: 'var(--color-comm-card-2)'
           }}>
             <div>
               <div style={{
