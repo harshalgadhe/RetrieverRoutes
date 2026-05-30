@@ -18,7 +18,7 @@ export default function AIPlannerModal({ isOpen, onClose, onBookCustomTrip }) {
         'Adventure': {
           title: 'Volcanoes & Sacred Waterfalls Trail',
           location: 'Bali Highlands & Northern Coast',
-          price: 949,
+          price: 79000,
           days: [
             { day: 'Day 1', act: 'Arrive in Ubud, traditional organic welcome dinner' },
             { day: 'Day 2', act: 'Hike through scenic Tegallalang emerald rice terraces & jungle paths' },
@@ -31,7 +31,7 @@ export default function AIPlannerModal({ isOpen, onClose, onBookCustomTrip }) {
         'Beach': {
           title: 'Karst Cliffs & Coral Island Hopping',
           location: 'Phuket & Phi Phi Bays',
-          price: 849,
+          price: 69000,
           days: [
             { day: 'Day 1', act: 'Arrive in Phuket, beachside seafood barbecue and briefing' },
             { day: 'Day 2', act: 'Private longtail boat tour of Phang Nga Bay cave shrines' },
@@ -44,7 +44,7 @@ export default function AIPlannerModal({ isOpen, onClose, onBookCustomTrip }) {
         'Mountains': {
           title: 'Matterhorn Pass & Alpine Lake Wanderer',
           location: 'Zermatt, Swiss Alps',
-          price: 1650,
+          price: 135000,
           days: [
             { day: 'Day 1', act: 'Arrive in Zermatt alpine village, local cheese fondue evening' },
             { day: 'Day 2', act: 'Scenic cogwheel train ride & high-altitude trail hike' },
@@ -407,7 +407,7 @@ export default function AIPlannerModal({ isOpen, onClose, onBookCustomTrip }) {
                 <div>
                   <span style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>Estimated Cost</span>
                   <div style={{ fontSize: '20px', fontWeight: '800', color: 'var(--color-text-gold)' }}>
-                    ${generatedItinerary.price}
+                    ₹{generatedItinerary.price.toLocaleString('en-IN')}
                     <span style={{ fontSize: '12px', color: 'var(--color-text-secondary)', fontWeight: '400' }}>/person</span>
                   </div>
                 </div>

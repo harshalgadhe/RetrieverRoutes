@@ -26,6 +26,16 @@
   --color-text-muted: #5e7d6e;    /* Darker Sage */
   --color-text-gold: #f29f05;
 
+  /* Premium Dynamic Text Shadows (Masterfully engineered for zero bleeding) */
+  --text-shadow-hero: 0 2px 10px rgba(7, 14, 11, 0.7);
+  --text-shadow-sub: 0 1px 6px rgba(7, 14, 11, 0.8);
+  --text-shadow-brand-green: 0 0 2px #fff, 0 0 15px rgba(6, 59, 33, 0.5);
+  --text-shadow-brand-gold: 0 0 15px rgba(242, 159, 5, 0.3);
+
+  /* Element Specific Overrides */
+  --color-logo-retriever: #ffffff;  /* Premium clean white in Dark Mode */
+  --color-icon-hover-bg: rgba(255, 255, 255, 0.08);
+
   /* Elevation / Shadows */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.6);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.8);
@@ -79,6 +89,16 @@ html, body {
   --color-text-secondary: #4a5750;/* Premium Charcoal Slate-Green (High Legibility Body) */
   --color-text-muted: #7c8c83;    /* Muted Sage-Grey */
   --color-text-gold: #d48200;     /* Deep Gold for Light Backgrounds */
+
+  /* Spill-Free Sharp Light Typography (Disabling dark fuzzy text shadows!) */
+  --text-shadow-hero: none;
+  --text-shadow-sub: none;
+  --text-shadow-brand-green: none;
+  --text-shadow-brand-gold: none;
+
+  /* Element Specifics Overrides */
+  --color-logo-retriever: #063b21;  /* Authentic deep Hunter Green */
+  --color-icon-hover-bg: rgba(6, 59, 33, 0.06); /* Sophisticated slate-green overlay */
   
   --shadow-sm: 0 4px 12px rgba(6, 59, 33, 0.03);
   --shadow-md: 0 12px 36px rgba(6, 59, 33, 0.05);
@@ -87,8 +107,85 @@ html, body {
   --shadow-glow-gold: 0 0 20px rgba(242, 159, 5, 0.08);
 }
 
+/* Premium Contrast Theme Toggle Button Class */
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+}
+
+.theme-toggle-btn:hover {
+  background: var(--color-icon-hover-bg);
+  color: var(--color-accent);
+}
+
+[data-theme='light'] .theme-toggle-btn {
+  color: var(--color-text-primary) !important; /* Force high contrast brand green in light mode */
+}
+
+[data-theme='light'] .theme-toggle-btn:hover {
+  color: var(--color-accent) !important;
+}
+
+/* Global Dropdown Item Styles */
+.dropdown-item {
+  color: var(--color-text-primary);
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all var(--transition-fast);
+  background: transparent;
+}
+
+.dropdown-item:hover {
+  background: rgba(242, 159, 5, 0.1) !important;
+  color: var(--color-text-gold) !important;
+}
+
 [data-theme='light'] body {
   background: #fafafa !important; /* Flat premium minimalist off-white */
+}
+
+/* Glass Panels & Cards Light Mode Overrides */
+[data-theme='light'] .glass-panel {
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(6, 59, 33, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(6, 59, 33, 0.03) !important;
+}
+
+[data-theme='light'] .glass-card {
+  background: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(6, 59, 33, 0.06) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+[data-theme='light'] .glass-card:hover {
+  background: #ffffff !important;
+  border-color: var(--color-border) !important;
+  box-shadow: var(--shadow-lg), var(--shadow-glow-gold) !important;
+}
+
+/* Form Inputs & Dropdowns Light Mode Overrides */
+[data-theme='light'] .form-input {
+  background: #ffffff !important;
+  border-color: rgba(6, 59, 33, 0.15) !important;
+  color: #063b21 !important;
+}
+
+[data-theme='light'] .form-input:focus {
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 0 10px rgba(242, 159, 5, 0.15) !important;
 }
 
 h1, h2, h3, h4, h5, h6 {

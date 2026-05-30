@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
-import { Search, Calendar, Users, MapPin, ChevronRight, Star, Phone, Mail, CheckCircle, Compass, Shield, Heart, ChevronLeft } from 'lucide-react';
+import { Search, Calendar, Users, MapPin, ChevronRight, Star, Phone, Mail, CheckCircle, Compass, Shield, Heart, ChevronLeft, ChevronDown, Plus, Minus } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { tripsData } from '../data/tripsData';
 
 export default function Homepage({ setCurrentScreen, setSelectedTrip, setSearchQuery, setFilterCategory, onOpenInquiry }) {
   const [searchWhere, setSearchWhere] = useState('');
   const [searchDates, setSearchDates] = useState('');
-  const [searchGuests, setSearchGuests] = useState('2 Guests');
+  
+  // Custom interactive travelers count state
+  const [adults, setAdults] = useState(2);
+  const [childrenCount, setChildrenCount] = useState(0);
   const [showGuestsDropdown, setShowGuestsDropdown] = useState(false);
+  const [showDatesDropdown, setShowDatesDropdown] = useState(false);
+  
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+
+  // Derived high-fidelity travelers label
+  const searchGuests = `${adults} Adult${adults !== 1 ? 's' : ''}${childrenCount > 0 ? `, ${childrenCount} Child${childrenCount !== 1 ? 'ren' : ''}` : ''}`;
 
   // Newsletter subscription
   const [newsletterEmail, setNewsletterEmail] = useState('');
@@ -66,7 +74,6 @@ export default function Homepage({ setCurrentScreen, setSelectedTrip, setSearchQ
       <section style={{
         position: 'relative',
         borderRadius: 'var(--radius-lg)',
-        overflow: 'hidden',
         minHeight: '440px',
         display: 'flex',
         flexDirection: 'column',
@@ -92,12 +99,12 @@ export default function Homepage({ setCurrentScreen, setSelectedTrip, setSearchQ
             lineHeight: '1.1',
             marginBottom: '16px',
             color: 'var(--color-text-primary)',
-            textShadow: '0 2px 10px rgba(7, 14, 11, 0.7)'
+            textShadow: 'var(--text-shadow-hero)'
           }}>
             Explore the World with{' '}
             <span style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
-              <span style={{ color: '#063b21', textShadow: '0 0 2px #fff, 0 0 15px rgba(6,59,33,0.5)' }}>Retriever</span>
-              <span style={{ color: '#f29f05', textShadow: '0 0 15px rgba(242,159,5,0.3)' }}>Routes</span>
+              <span style={{ color: 'var(--color-logo-retriever)', textShadow: 'var(--text-shadow-brand-green)' }}>Retriever</span>
+              <span style={{ color: '#f29f05', textShadow: 'var(--text-shadow-brand-gold)' }}>Routes</span>
             </span>
           </h1>
           <p style={{
@@ -106,7 +113,7 @@ export default function Homepage({ setCurrentScreen, setSelectedTrip, setSearchQ
             marginBottom: '32px',
             fontWeight: '500',
             lineHeight: '1.6',
-            textShadow: '0 1px 6px rgba(7, 14, 11, 0.8)'
+            textShadow: 'var(--text-shadow-sub)'
           }}>
             Find custom outdoor routes, unforgettable tours, and certified pet-friendly hiking trails.
           </p>
@@ -146,21 +153,41 @@ export default function Homepage({ setCurrentScreen, setSelectedTrip, setSearchQ
             />
           </div>
 
-          <div>
+          <div style={{ position: 'relative' }}>
             <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <Calendar size={14} style={{ color: 'var(--color-accent)' }} />
               Check In
             </label>
-            <input 
-              type="text" 
-              placeholder="Select season..." 
-              value={searchDates}
-              onChange={(e) => setSearchDates(e.target.value)}
-              onClick={() => setSearchDates('Summer 2026')}
+            <div 
+              onClick={() => {
+                setShowDatesDropdown(!showDatesDropdown);
+                setShowGuestsDropdown(false);
+              }}
               className="form-input"
-              readOnly
-              style={{ cursor: 'pointer' }}
-            />
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', userSelect: 'none' }}
+            >
+              <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {searchDates || 'Select season...'}
+              </span>
+              <ChevronDown size={16} style={{ color: 'var(--color-text-muted)', flexShrink: 0, transform: showDatesDropdown ? 'rotate(180deg)' : 'none', transition: 'transform var(--transition-fast)' }} />
+            </div>
+            {showDatesDropdown && (
+              <div className="glass-panel" style={{
+                position: 'absolute', top: 'calc(100% + 8px)', left: 0, right: 0,
+                borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border-green)',
+                boxShadow: 'var(--shadow-lg)', zIndex: 20
+              }}>
+                {['Summer 2026 (Peak Hikes)', 'Autumn 2026 (Gold Foliage)', 'Winter 2027 (Alpine Snow)', 'Spring 2027 (Blooming Trails)'].map((s) => (
+                  <div
+                    key={s}
+                    onClick={() => { setSearchDates(s); setShowDatesDropdown(false); }}
+                    className="dropdown-item"
+                  >
+                    {s}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           <div style={{ position: 'relative' }}>
@@ -169,28 +196,106 @@ export default function Homepage({ setCurrentScreen, setSelectedTrip, setSearchQ
               Travelers
             </label>
             <div 
-              onClick={() => setShowGuestsDropdown(!showGuestsDropdown)}
+              onClick={() => {
+                setShowGuestsDropdown(!showGuestsDropdown);
+                setShowDatesDropdown(false);
+              }}
               className="form-input"
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', userSelect: 'none' }}
             >
-              {searchGuests}
+              <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {searchGuests}
+              </span>
+              <ChevronDown size={16} style={{ color: 'var(--color-text-muted)', flexShrink: 0, transform: showGuestsDropdown ? 'rotate(180deg)' : 'none', transition: 'transform var(--transition-fast)' }} />
             </div>
             {showGuestsDropdown && (
               <div className="glass-panel" style={{
-                position: 'absolute', top: 'calc(100% + 8px)', left: 0, right: 0,
+                position: 'absolute', top: 'calc(100% + 8px)', left: 0, right: 0, minWidth: '240px',
                 borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border-green)',
-                boxShadow: 'var(--shadow-lg)', zIndex: 20
+                boxShadow: 'var(--shadow-lg)', zIndex: 20, padding: '16px'
               }}>
-                {['1 Guest', '2 Guests', '4 Guests', 'Custom Group'].map((g) => (
-                  <div
-                    key={g}
-                    onClick={() => { setSearchGuests(g); setShowGuestsDropdown(false); }}
-                    style={{ padding: '12px 16px', cursor: 'pointer', fontSize: '13px' }}
-                    className="dropdown-item"
-                  >
-                    {g}
+                {/* Adults Counter */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <span style={{ fontSize: '13px', fontWeight: '700', color: 'var(--color-text-primary)' }}>Adults</span>
+                    <span style={{ fontSize: '10px', color: 'var(--color-text-muted)' }}>Age 13 or above</span>
                   </div>
-                ))}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <button
+                      type="button"
+                      onClick={() => setAdults(Math.max(1, adults - 1))}
+                      style={{
+                        width: '28px', height: '28px', borderRadius: '50%', border: '1px solid var(--color-border-green)',
+                        background: 'none', color: 'var(--color-text-primary)', cursor: 'pointer',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center'
+                      }}
+                      className="icon-hover-btn"
+                    >
+                      <Minus size={12} />
+                    </button>
+                    <span style={{ fontSize: '14px', fontWeight: '700', minWidth: '14px', textAlign: 'center' }}>{adults}</span>
+                    <button
+                      type="button"
+                      onClick={() => setAdults(adults + 1)}
+                      style={{
+                        width: '28px', height: '28px', borderRadius: '50%', border: '1px solid var(--color-border-green)',
+                        background: 'none', color: 'var(--color-text-primary)', cursor: 'pointer',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center'
+                      }}
+                      className="icon-hover-btn"
+                    >
+                      <Plus size={12} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Children Counter */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <span style={{ fontSize: '13px', fontWeight: '700', color: 'var(--color-text-primary)' }}>Children</span>
+                    <span style={{ fontSize: '10px', color: 'var(--color-text-muted)' }}>Ages 2-12</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <button
+                      type="button"
+                      onClick={() => setChildrenCount(Math.max(0, childrenCount - 1))}
+                      style={{
+                        width: '28px', height: '28px', borderRadius: '50%', border: '1px solid var(--color-border-green)',
+                        background: 'none', color: 'var(--color-text-primary)', cursor: 'pointer',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center'
+                      }}
+                      className="icon-hover-btn"
+                    >
+                      <Minus size={12} />
+                    </button>
+                    <span style={{ fontSize: '14px', fontWeight: '700', minWidth: '14px', textAlign: 'center' }}>{childrenCount}</span>
+                    <button
+                      type="button"
+                      onClick={() => setChildrenCount(childrenCount + 1)}
+                      style={{
+                        width: '28px', height: '28px', borderRadius: '50%', border: '1px solid var(--color-border-green)',
+                        background: 'none', color: 'var(--color-text-primary)', cursor: 'pointer',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center'
+                      }}
+                      className="icon-hover-btn"
+                    >
+                      <Plus size={12} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Done button to close */}
+                <button
+                  type="button"
+                  onClick={() => setShowGuestsDropdown(false)}
+                  className="glow-btn-gold"
+                  style={{
+                    width: '100%', padding: '8px 12px', border: 'none', borderRadius: 'var(--radius-sm)',
+                    fontSize: '12px', fontWeight: '700', cursor: 'pointer'
+                  }}
+                >
+                  Apply Selection
+                </button>
               </div>
             )}
           </div>

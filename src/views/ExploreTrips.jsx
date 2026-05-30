@@ -71,8 +71,7 @@ export default function ExploreTrips({
             style={{
               paddingLeft: '48px',
               borderRadius: 'var(--radius-md)',
-              border: '1px solid var(--color-border-green)',
-              background: 'rgba(11, 21, 16, 0.4)'
+              border: '1px solid var(--color-border-green)'
             }}
           />
         </div>

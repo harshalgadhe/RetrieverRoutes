@@ -47,8 +47,8 @@ export default function Navbar({ currentScreen, setCurrentScreen, onOpenInquiry,
           }}
           className="desktop-logo-text"
         >
-          <span style={{ color: '#063b21', textShadow: '0 0 1px #fff, 0 0 10px rgba(6,59,33,0.4)' }}>Retriever</span>
-          <span style={{ color: '#f29f05', textShadow: '0 0 10px rgba(242,159,5,0.2)' }}>Routes</span>
+          <span style={{ color: 'var(--color-logo-retriever)', textShadow: 'var(--text-shadow-brand-green)' }}>Retriever</span>
+          <span style={{ color: '#f29f05', textShadow: 'var(--text-shadow-brand-gold)' }}>Routes</span>
         </span>
       </div>
 
@@ -107,19 +107,7 @@ export default function Navbar({ currentScreen, setCurrentScreen, onOpenInquiry,
         {/* Modern Theme Toggle Button */}
         <button
           onClick={toggleTheme}
-          className="icon-hover-btn"
-          style={{
-            background: 'none',
-            border: 'none',
-            color: 'var(--color-text-secondary)',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '10px',
-            borderRadius: '50%',
-            transition: 'background var(--transition-fast), color var(--transition-fast)'
-          }}
+          className="theme-toggle-btn"
           title={theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
         >
           {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}

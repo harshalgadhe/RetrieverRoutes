@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, MessageSquare, Send, Check, Phone, ArrowRight, ShieldCheck } from 'lucide-react';
+import { X, MessageSquare, Send, Check, Phone, ArrowRight, ShieldCheck, ChevronDown } from 'lucide-react';
 
 export default function InquiryModal({ isOpen, onClose, trip }) {
   const [name, setName] = useState('');
@@ -147,18 +147,31 @@ export default function InquiryModal({ isOpen, onClose, trip }) {
               {/* Date preference */}
               <div>
                 <label className="form-label">Preferred Travel Window</label>
-                <select 
-                  value={datePreference} 
-                  onChange={(e) => setDatePreference(e.target.value)} 
-                  className="form-input"
-                  style={{ cursor: 'pointer', appearance: 'none', background: 'rgba(0, 0, 0, 0.4)' }}
-                >
-                  <option value="" disabled>Select Month / Season</option>
-                  <option value="June - August 2026">June - August 2026 (Summer Peak)</option>
-                  <option value="September - November 2026">September - November 2026 (Autumn Trails)</option>
-                  <option value="December - February 2027">December - February 2027 (Winter Treks)</option>
-                  <option value="Spring 2027">Spring 2027</option>
-                </select>
+                <div style={{ position: 'relative' }}>
+                  <select 
+                    value={datePreference} 
+                    onChange={(e) => setDatePreference(e.target.value)} 
+                    className="form-input"
+                    style={{ cursor: 'pointer', appearance: 'none', background: 'rgba(0, 0, 0, 0.4)', paddingRight: '40px' }}
+                  >
+                    <option value="" disabled>Select Month / Season</option>
+                    <option value="June - August 2026">June - August 2026 (Summer Peak)</option>
+                    <option value="September - November 2026">September - November 2026 (Autumn Trails)</option>
+                    <option value="December - February 2027">December - February 2027 (Winter Treks)</option>
+                    <option value="Spring 2027">Spring 2027</option>
+                  </select>
+                  <ChevronDown 
+                    size={16} 
+                    style={{ 
+                      position: 'absolute', 
+                      right: '16px', 
+                      top: '50%', 
+                      transform: 'translateY(-50%)', 
+                      color: 'var(--color-text-muted)', 
+                      pointerEvents: 'none' 
+                    }} 
+                  />
+                </div>
               </div>
 
               {/* Message */}
